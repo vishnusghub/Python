@@ -9,6 +9,11 @@ except ImportError:
 filepaths = list(good_file_paths())
 assert filepaths, "good_file_paths() failed!"
 
+lower_files = [file for file in filepaths if file != file.upper()]
+if lower_files:
+    print(f"{len(lower_files)} files contain lowercase characters:")
+    print("\n".join(lower_files) + "\n")
+
 upper_files = [file for file in filepaths if file != file.lower()]
 if upper_files:
     print(f"{len(upper_files)} files contain uppercase characters:")
@@ -29,7 +34,7 @@ if nodir_files:
     print(f"{len(nodir_files)} files are not in a directory:")
     print("\n".join(nodir_files) + "\n")
 
-bad_files = len(upper_files + space_files + hyphen_files + nodir_files)
+bad_files = len(lower_files + upper_files + space_files + hyphen_files + nodir_files)
 if bad_files:
     import sys
 
